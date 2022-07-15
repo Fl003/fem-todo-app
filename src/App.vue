@@ -16,41 +16,30 @@
       <todoform/>
 
       <todolist
-        :listToShow="todolist"/>
+        :listToShow="this.list"/>
     </div>
   </div>
 </template>
 
 <script>
-import draggable from 'vuedraggable'
 import todolist from './components/todolist.vue'
 import todoform from './components/todoform.vue'
 
 export default {
   name: 'App',
   components: {
-    draggable,
     todolist,
     todoform
   },
   data() {
     return {
-      todoList: [
+      list: [
         {"id": 1, "task": "Task1"},
         {"id": 2, "task": "Task2"},
         {"id": 3, "task": "Task3"}
       ],
-      drag: false
-    }
-  },
-  computed: {
-    dragOptions() {
-      return {
-        animation: 200,
-        group: "description",
-        disabled: false,
-        ghostClass: "ghost"
-      };
+      completed: [],
+      active: [],
     }
   }
 }
@@ -61,7 +50,7 @@ export default {
 
 :root {
   --primary-blue: hsl(220, 98%, 61%);
-  --background-gradient: linear-gradient(hsl(192, 100%, 67%) to hsl(280, 87%, 65%));
+  --background-gradient: linear-gradient(150deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
   /* Light Theme */
   --l-very-light-grey: hsl(0, 0%, 98%);
   --l-very-light-grey-blue: hsl(236, 33%, 92%);
@@ -92,12 +81,14 @@ html, body {
 
 #app {
   height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 #header {
   position: absolute;
   width: 100%;
-  height: 40%;
+  height: 300px;
   z-index: 50;
 }
 
@@ -108,20 +99,22 @@ html, body {
 }
 
 #content {
+  padding-top: 50px;
   position: relative;
   z-index: 100;
+  width: 40%;
 }
 
 .row {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 40px;
   text-transform: uppercase;
-  letter-spacing: 5px;
+  letter-spacing: 15px;
   color: var(--l-very-light-grey)
 }
 
